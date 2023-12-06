@@ -1,14 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch1m5lt2jqoh7"]
+[gd_scene load_steps=3 format=3 uid="uid://ch1m5lt2jqoh7"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_y5ilt"]
 [ext_resource type="Theme" uid="uid://nc8k1xgl7ogv" path="res://resources/themes/buttons.tres" id="2_1ag82"]
-[ext_resource type="Script" path="res://Camera.gd" id="2_4jy3i"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_y5ilt")
-
-[node name="Camera" type="Camera2D" parent="."]
-script = ExtResource("2_4jy3i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

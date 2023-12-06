@@ -19,6 +19,6 @@ func _on_back_pressed():
 	if !instance == null:
 		instance.queue_free()
 		menu.visible = true
-		back.set_text("back")
+		back.set_text("exit")
 	else:
 		get_tree().quit()

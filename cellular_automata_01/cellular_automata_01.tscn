@@ -1,21 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://davci5253lit1"]
+[gd_scene load_steps=8 format=3 uid="uid://davci5253lit1"]
 
 [ext_resource type="TileSet" uid="uid://bs3eruoqvskj2" path="res://tilesets/topdown_auto.tres" id="1_i6yyx"]
 [ext_resource type="Script" path="res://cellular_automata_01/NoiseGen.gd" id="1_ixx0s"]
 [ext_resource type="Script" path="res://cellular_automata_01/cellular_automata_01.gd" id="1_tymrx"]
 [ext_resource type="Theme" uid="uid://nc8k1xgl7ogv" path="res://resources/themes/buttons.tres" id="4_jknpy"]
+[ext_resource type="Script" path="res://Camera.gd" id="5_mof08"]
+[ext_resource type="Theme" uid="uid://g5spqvo27fmh" path="res://resources/themes/text.tres" id="5_nrubc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_w7nx5"]
 resource_local_to_scene = true
 noise_type = 3
-frequency = 0.0736
+frequency = 0.2011
 fractal_octaves = 4
 
 [node name="CellularAutomata_01" type="Node2D"]
 script = ExtResource("1_tymrx")
 width = 50
 height = 50
-noise_cutoff_point = 5.0
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_i6yyx")
@@ -37,40 +38,120 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 688.0
-offset_top = -495.0
-offset_right = 917.0
-offset_bottom = -257.0
+offset_left = 633.0
+offset_top = -507.0
+offset_right = 895.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
 vertical = true
-
-[node name="IterationsDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("4_jknpy")
-text = "iterations: 0"
-fit_content = true
-autowrap_mode = 0
 
 [node name="Iterate" type="Button" parent="CanvasLayer/MarginContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 theme = ExtResource("4_jknpy")
-text = "iterate"
+text = "Iterate"
+
+[node name="IterationsDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_nrubc")
+text = "Iterations: 0"
+fit_content = true
+autowrap_mode = 0
 
 [node name="Regenerate" type="Button" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_jknpy")
-text = "new map"
+text = "New Map"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+[node name="TileChanceDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_nrubc")
+text = "Tile Chance: 50"
+fit_content = true
+autowrap_mode = 0
+
+[node name="TileChanceSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 5.0
+max_value = 95.0
+value = 50.0
+
+[node name="WidthDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_nrubc")
+text = "Width: 50"
+fit_content = true
+autowrap_mode = 0
+
+[node name="WidthSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+min_value = 10.0
+step = 5.0
+value = 50.0
+
+[node name="HeightDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_nrubc")
+text = "Height: 50"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HeightSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+min_value = 10.0
+step = 5.0
+value = 50.0
+
+[node name="NeighboursDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_nrubc")
+text = "Neighbours >= 4"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NeighboursSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="NoiseFreqDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_nrubc")
+text = "Neighbours >= 4"
+fit_content = true
+autowrap_mode = 0
+
+[node name="NoiseFreqSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+min_value = 0.01
+max_value = 0.5
+step = 0.01
+value = 0.1
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("5_mof08")
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Iterate" to="." method="_on_iterate_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Regenerate" to="." method="_on_regenerate_pressed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/TileChanceSlider" to="." method="_on_tile_chance_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/WidthSlider" to="." method="_on_width_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/HeightSlider" to="." method="_on_height_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/NeighboursSlider" to="." method="_on_neighbours_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/NoiseFreqSlider" to="." method="_on_noise_freq_slider_value_changed"]

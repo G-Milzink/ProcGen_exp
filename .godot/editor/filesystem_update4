@@ -1,5 +1,9 @@
 res://main.tscn
 res://tilesets/topdown_auto.tres
-res://cellular_automata_01/cellular_automata_01.gd
 res://cellular_automata_01/cellular_automata_01.tscn
+res://cellular_automata_01/cellular_automata_01.gd
+res://main.gd
 res://Camera.gd
+res://cellular_automata_01/NoiseGen.gd
+res://resources/themes/buttons.tres
+res://resources/themes/text.tres

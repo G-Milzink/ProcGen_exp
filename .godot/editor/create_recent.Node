@@ -1,6 +1,7 @@
 HSlider
-RichTextLabel
+ColorRect
 BoxContainer
+RichTextLabel
 Button
 CanvasLayer
 MarginContainer
