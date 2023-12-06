@@ -6,7 +6,7 @@ extends Node2D
 
 @export var width = 4
 @export var height = 4
-@export var noise_cutoff_point = 0.0
+@export_range(05,95) var noise_cutoff_point
 @export var min_nr_neighbours = 4
 @export var nr_of_iterations = 0
 
@@ -29,6 +29,9 @@ func _ready():
 
 func _on_regenerate_pressed():
 	iterations_done = 0
+	offset_x = -width/2
+	offset_y = -height/2
+	_SetFloorLayer()
 	noise_gen._newSeed()
 	_generateNoiseGrid()
 	
@@ -41,6 +44,7 @@ func _process(delta):
 		_iterateGrid()
 
 func _SetFloorLayer():
+	tile_map.clear_layer(0)
 	for x in width:
 		for y in height:
 			var pos = (Vector2(x+offset_x, y+offset_y))
@@ -49,10 +53,10 @@ func _SetFloorLayer():
 func _generateNoiseGrid():
 	noise_grid.clear()
 	for x in width:
-		for y in width:
+		for y in height:
 			var pos = (Vector2(x+offset_x, y+offset_y))
-			var value = noise_gen._getNoise(pos)
-			if value >= noise_cutoff_point:
+			var value = (noise_gen._getNoise(pos)+1)/2*100
+			if value >= 100-noise_cutoff_point:
 				noise_grid.append(pos)
 	tile_map.clear_layer(1)
 	tile_map.set_cells_terrain_connect(1,noise_grid,0,0,false)
@@ -63,7 +67,7 @@ func _iterateGrid():
 	var nr_of_neighbours
 	iterated_grid.clear()
 	for x in width:
-		for y in width:
+		for y in height:
 			tile = (Vector2(x+offset_x, y+offset_y))
 			nr_of_neighbours = 0
 			neighbour = tile_map.get_neighbor_cell(tile,TileSet.CELL_NEIGHBOR_TOP_SIDE)
