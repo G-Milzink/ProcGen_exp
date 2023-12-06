@@ -2,3 +2,4 @@ res://main.tscn
 res://tilesets/topdown_auto.tres
 res://cellular_automata_01/cellular_automata_01.gd
 res://cellular_automata_01/cellular_automata_01.tscn
+res://Camera.gd
