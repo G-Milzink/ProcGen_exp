@@ -7,6 +7,8 @@ var cellular_automata_01 = preload("res://cellular_automata_01/cellular_automata
 
 var instance
 
+func _ready():
+	RenderingServer.set_default_clear_color(Color("0a0613"))
 
 func _on_cel_auto_01_pressed():
 	instance = cellular_automata_01.instantiate()

@@ -15,7 +15,7 @@ extends Node2D
 @export_range(05,95) var noise_cutoff_point = 50
 @export var min_nr_neighbours = 4
 @export var nr_of_iterations = 0
-@export var noise_frequency = 0.01
+@export var noise_frequency = 0.2
 
 var noise_grid: PackedVector2Array
 var iterated_grid: PackedVector2Array
