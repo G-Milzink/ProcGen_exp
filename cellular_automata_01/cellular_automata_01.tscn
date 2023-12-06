@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://davci5253lit1"]
+
+[ext_resource type="TileSet" uid="uid://bs3eruoqvskj2" path="res://tilesets/topdown_auto.tres" id="1_i6yyx"]
+[ext_resource type="Script" path="res://cellular_automata_01/NoiseGen.gd" id="1_ixx0s"]
+[ext_resource type="Script" path="res://cellular_automata_01/cellular_automata_01.gd" id="1_tymrx"]
+[ext_resource type="Theme" uid="uid://nc8k1xgl7ogv" path="res://resources/themes/buttons.tres" id="4_jknpy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w7nx5"]
+resource_local_to_scene = true
+noise_type = 3
+frequency = 0.1292
+fractal_octaves = 3
+fractal_gain = 1.02
+
+[node name="CellularAutomata_01" type="Node2D"]
+script = ExtResource("1_tymrx")
+width = 40
+height = 40
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_i6yyx")
+format = 2
+layer_0/name = "Grass"
+layer_1/name = "Walls"
+layer_1/tile_data = PackedInt32Array()
+
+[node name="NoiseGen" type="Node" parent="."]
+script = ExtResource("1_ixx0s")
+noise = SubResource("FastNoiseLite_w7nx5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="BoxContainer" parent="CanvasLayer"]
+layout_direction = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 688.0
+offset_top = -495.0
+offset_right = 917.0
+offset_bottom = -257.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+vertical = true
+
+[node name="IterationsDisplay" type="RichTextLabel" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_jknpy")
+text = "iterations: 0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Iterate" type="Button" parent="CanvasLayer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_jknpy")
+text = "iterate"
+
+[node name="Regenerate" type="Button" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_jknpy")
+text = "new map"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Iterate" to="." method="_on_iterate_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Regenerate" to="." method="_on_regenerate_pressed"]
