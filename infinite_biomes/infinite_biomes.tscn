@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckcv5eoxhdcfi"]
+
+[ext_resource type="Script" path="res://infinite_biomes/infinite_biomes.gd" id="1_a4q1s"]
+[ext_resource type="TileSet" uid="uid://w6r5to73vxeu" path="res://tilesets/inf_biomes.tres" id="1_urw0c"]
+[ext_resource type="Script" path="res://infinite_biomes/NoiseGens.gd" id="2_ivotm"]
+[ext_resource type="PackedScene" uid="uid://brxrlnsxqrh4s" path="res://infinite_biomes/ib_player.tscn" id="3_5kqlm"]
+
+[node name="InfiniteBiomes" type="Node2D"]
+script = ExtResource("1_a4q1s")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_urw0c")
+format = 2
+
+[node name="NoiseGens" type="Node" parent="."]
+script = ExtResource("2_ivotm")
+
+[node name="IB_Player" parent="." instance=ExtResource("3_5kqlm")]
