@@ -50,6 +50,7 @@ vertical = true
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
+tooltip_text = "Perform next iteration."
 theme = ExtResource("4_jknpy")
 text = "Iterate"
 
@@ -65,6 +66,7 @@ autowrap_mode = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Generate new map using the settings below."
 theme = ExtResource("4_jknpy")
 text = "New Map"
 
@@ -80,6 +82,7 @@ autowrap_mode = 0
 [node name="TileChanceSlider" type="HSlider" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+tooltip_text = "Determines the % of chance that a tile in the noise grid will be populated. (This is before any iterations take place) Optimal range: 45 - 55"
 min_value = 5.0
 max_value = 95.0
 value = 50.0
