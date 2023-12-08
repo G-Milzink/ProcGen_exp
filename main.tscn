@@ -38,6 +38,26 @@ tooltip_text = "Generate map using cellular automata."
 theme = ExtResource("2_1ag82")
 text = "Cellular Automata"
 
+[node name="InfBiomes" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -54.0
+offset_right = 178.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Generate map using cellular automata."
+theme = ExtResource("2_1ag82")
+text = "Infinite Biomes"
+
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -60,4 +80,5 @@ theme = ExtResource("2_1ag82")
 text = "exit"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/CelAuto01" to="." method="_on_cel_auto_01_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/InfBiomes" to="." method="_on_inf_biomes_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer2/Control/Back" to="." method="_on_back_pressed"]

@@ -1,11 +1,6 @@
 res://main.tscn
 res://tilesets/topdown_auto.tres
-res://cellular_automata_01/cellular_automata_01.tscn
-res://cellular_automata_01/cellular_automata_01.gd
-res://infinite_biomes/infinite_biomes.tscn
 res://tilesets/inf_biomes.tres
-res://infinite_biomes/NoiseGens.gd
-res://infinite_biomes/ib_player.tscn
-res://infinite_biomes/ib_player.gd
-res://main.gd
+res://infinite_biomes/infinite_biomes.tscn
 res://infinite_biomes/infinite_biomes.gd
+res://main.gd
