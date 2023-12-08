@@ -30,8 +30,8 @@ var offset_y
 #endregion
 
 func _ready():
-	offset_x = -width/2
-	offset_y = -height/2
+	offset_x = -width/2.0
+	offset_y = -height/2.0
 	_SetFloorLayer()
 	_generateNoiseGrid()
 	for i in nr_of_iterations:
@@ -148,8 +148,8 @@ func _updateDisplay():
 
 func _on_regenerate_pressed():
 	iterations_done = 0
-	offset_x = -width/2
-	offset_y = -height/2
+	offset_x = -width/2.0
+	offset_y = -height/2.0
 	_SetFloorLayer()
 	noise_gen._newSeed()
 	_generateNoiseGrid()

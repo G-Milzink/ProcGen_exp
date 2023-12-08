@@ -1,6 +1,7 @@
-res://main.tscn
 res://tilesets/topdown_auto.tres
 res://tilesets/inf_biomes.tres
+res://tests/noisetest.tscn
+res://tests/noisetest.gd
+res://main.tscn
 res://infinite_biomes/infinite_biomes.tscn
 res://infinite_biomes/infinite_biomes.gd
-res://main.gd

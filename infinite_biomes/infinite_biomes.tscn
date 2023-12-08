@@ -30,5 +30,6 @@ format = 2
 [node name="IB_Player" parent="." instance=ExtResource("3_5kqlm")]
 
 [node name="Camera2D" type="Camera2D" parent="IB_Player"]
-zoom = Vector2(3, 3)
+process_callback = 0
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
