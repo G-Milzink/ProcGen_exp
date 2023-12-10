@@ -5,8 +5,8 @@
 
 [sub_resource type="Gradient" id="Gradient_6b4kk"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.504132, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.259887, 0.38983, 0.504132, 0.615819, 0.728814, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.609629, 0.609629, 0.609629, 1, 0.720462, 0.720462, 0.720462, 1, 1, 1, 1, 1, 0.676701, 0.676701, 0.676701, 1, 0.501288, 0.501288, 0.501288, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_afmlf"]
 gradient = SubResource("Gradient_6b4kk")
@@ -54,8 +54,8 @@ sources/0 = SubResource("TileSetAtlasSource_x4ccc")
 
 [node name="WorldGenerator" type="Node2D"]
 script = ExtResource("1_8a8gl")
-map_width = 2000
-map_height = 2000
+map_width = 500
+map_height = 500
 sea_level = -0.2
 freezing_point = 0.15
 temperature = SubResource("GradientTexture2D_afmlf")
@@ -67,4 +67,4 @@ tile_set = SubResource("TileSet_wwjjn")
 format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(-0.034, -0.034)
+zoom = Vector2(-0.072, -0.072)

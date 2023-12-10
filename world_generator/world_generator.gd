@@ -11,8 +11,10 @@ extends Node2D
 @export var temperature: GradientTexture2D
 @export var altitude: FastNoiseLite
 @export var humidity: FastNoiseLite
+@export var noise_map: FastNoiseLite
 
 @onready var tile_map = $TileMap
+var debug_tile = Vector2(4,4)
 
 var temp_img: Image
 var temp: float
@@ -29,13 +31,18 @@ func _ready():
 
 func _generateOceans():
 	altitude.seed = randi()
+	humidity.seed = randi()
+	noise_map.seed = randi()
+
 	var pos = Vector2.ZERO
 	var tile = Vector2.ZERO
+
+
 	for x in map_width:
 		for y in map_height:
 			pos.x = x - map_width/2.0
 			pos.y = y - map_height/2.0
-			temp = temp_img.get_pixel(x,y).r
+			temp = temp_img.get_pixel(x,y).r * noise_map.get_noise_2d(x,y)
 			alt = altitude.get_noise_2d(x,y)
 			if alt < sea_level:
 					if alt < 2.0 * sea_level:
@@ -52,8 +59,8 @@ func _generateOceans():
 				else:
 					tile_map.set_cell(0,pos,0,Vector2i(4,2))
 			else:
-				tile.x = ceil(((temp + 1.0)*0.5)*2)
+				tile.x = floor(temp*-3)+3
 				humid = humidity.get_noise_2d(x,y)
-				tile.y = ceil((((humid + 1.0)*0.5)*-2)+3)
+				tile.y = ceil(((humid+1)*0.5)*-3)+3
 				tile_map.set_cell(0,pos,0,tile)
 	print("done!")
