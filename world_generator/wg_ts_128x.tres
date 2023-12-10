@@ -1,0 +1,42 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dd8ur2bjt06f1"]
+
+[ext_resource type="Texture2D" uid="uid://be3coggkmpudy" path="res://0_PNG/world_gen_128x.png" id="1_cq14i"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ygy8m"]
+texture = ExtResource("1_cq14i")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+3:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+7:7/0 = 0
+
+[resource]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_ygy8m")

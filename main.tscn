@@ -58,6 +58,15 @@ tooltip_text = "Generate map using cellular automata."
 theme = ExtResource("2_1ag82")
 text = "Infinite Biomes"
 
+[node name="WorldGen" type="Button" parent="CanvasLayer/MarginContainer/Menu"]
+layout_mode = 0
+offset_left = 838.0
+offset_top = 566.0
+offset_right = 1094.0
+offset_bottom = 636.0
+theme = ExtResource("2_1ag82")
+text = "World Gen"
+
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -81,4 +90,5 @@ text = "exit"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/CelAuto01" to="." method="_on_cel_auto_01_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/InfBiomes" to="." method="_on_inf_biomes_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Menu/WorldGen" to="." method="_on_world_gen_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer2/Control/Back" to="." method="_on_back_pressed"]

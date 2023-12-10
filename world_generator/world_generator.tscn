@@ -1,70 +1,51 @@
-[gd_scene load_steps=9 format=3 uid="uid://hj12e0gl5krp"]
+[gd_scene load_steps=8 format=3 uid="uid://hj12e0gl5krp"]
 
 [ext_resource type="Script" path="res://world_generator/world_generator.gd" id="1_8a8gl"]
-[ext_resource type="Texture2D" uid="uid://cl1r1uhavuuc4" path="res://0_PNG/world_gen.png" id="2_vxcy8"]
+[ext_resource type="TileSet" uid="uid://dd8ur2bjt06f1" path="res://world_generator/wg_ts_128x.tres" id="2_tduao"]
 
-[sub_resource type="Gradient" id="Gradient_6b4kk"]
+[sub_resource type="Gradient" id="Gradient_45p3m"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.259887, 0.38983, 0.504132, 0.615819, 0.728814, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.609629, 0.609629, 0.609629, 1, 0.720462, 0.720462, 0.720462, 1, 1, 1, 1, 1, 0.676701, 0.676701, 0.676701, 1, 0.501288, 0.501288, 0.501288, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.360294, 0.544118, 0.698529, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.632653, 0.632653, 0.632653, 1, 1, 1, 1, 1, 0.585062, 0.585062, 0.585062, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_afmlf"]
-gradient = SubResource("Gradient_6b4kk")
-width = 1000
-height = 1000
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_edyst"]
+gradient = SubResource("Gradient_45p3m")
 fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 metadata/_snap_enabled = true
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_os4k4"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ms8kh"]
 noise_type = 0
-frequency = 0.003
+frequency = 0.009
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3dukw"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l852e"]
 noise_type = 0
-seed = 1
-frequency = 0.0027
+frequency = 0.0063
+fractal_gain = 0.49
+fractal_weighted_strength = 0.35
+domain_warp_enabled = true
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x4ccc"]
-texture = ExtResource("2_vxcy8")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-4:0/0 = 0
-4:1/0 = 0
-4:4/0 = 0
-2:1/0 = 0
-1:1/0 = 0
-0:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-2:3/0 = 0
-1:3/0 = 0
-0:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-4:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_wwjjn"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_x4ccc")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5kn84"]
+noise_type = 4
+frequency = 0.004
 
 [node name="WorldGenerator" type="Node2D"]
+position = Vector2(0, -5)
 script = ExtResource("1_8a8gl")
-map_width = 500
-map_height = 500
-sea_level = -0.2
-freezing_point = 0.15
-temperature = SubResource("GradientTexture2D_afmlf")
-altitude = SubResource("FastNoiseLite_os4k4")
-humidity = SubResource("FastNoiseLite_3dukw")
+map_width = null
+map_height = null
+sea_level = -0.25
+mountain_level = null
+absolute_zero = null
+freezing_point = null
+temperature = SubResource("GradientTexture2D_edyst")
+altitude = SubResource("FastNoiseLite_ms8kh")
+humidity = SubResource("FastNoiseLite_l852e")
+noise_map = SubResource("FastNoiseLite_5kn84")
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_wwjjn")
+tile_set = ExtResource("2_tduao")
 format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(-0.072, -0.072)
+zoom = Vector2(0.01, 0.01)

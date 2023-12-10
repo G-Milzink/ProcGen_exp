@@ -2,6 +2,7 @@ extends Node2D
 
 var cellular_automata = preload("res://cellular_automata_01/cellular_automata_01.tscn")
 var infinite_biomes = preload("res://infinite_biomes/infinite_biomes.tscn")
+var world_generator = preload("res://world_generator/world_generator.tscn")
 
 @onready var menu = $CanvasLayer/MarginContainer/Menu
 @onready var back = $CanvasLayer/MarginContainer2/Control/Back
@@ -26,8 +27,15 @@ func _on_cel_auto_01_pressed():
 	back.set_text("back")
 
 
-func _on_inf_biomes_pressed():
+func _on_inf_biomes_pressed():  
 	instance = infinite_biomes.instantiate()
+	call_deferred("add_sibling", instance)
+	menu.visible = false
+	back.set_text("back")
+
+
+func _on_world_gen_pressed():
+	instance = world_generator.instantiate()
 	call_deferred("add_sibling", instance)
 	menu.visible = false
 	back.set_text("back")
