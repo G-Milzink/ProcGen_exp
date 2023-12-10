@@ -1,9 +1,10 @@
+TileMap
+MeshInstance2D
 Camera2D
 Sprite2D
 CollisionShape2D
 CharacterBody2D
 Node
-TileMap
 HSlider
 ColorRect
 BoxContainer
@@ -11,5 +12,3 @@ RichTextLabel
 Button
 CanvasLayer
 MarginContainer
-Node2D
-Control
