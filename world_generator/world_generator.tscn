@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://hj12e0gl5krp"]
+[gd_scene load_steps=9 format=3 uid="uid://hj12e0gl5krp"]
 
 [ext_resource type="Script" path="res://world_generator/world_generator.gd" id="1_8a8gl"]
 [ext_resource type="TileSet" uid="uid://dd8ur2bjt06f1" path="res://world_generator/wg_ts_128x.tres" id="2_tduao"]
+[ext_resource type="PackedScene" uid="uid://brxrlnsxqrh4s" path="res://infinite_biomes/ib_player.tscn" id="3_agb4p"]
 
 [sub_resource type="Gradient" id="Gradient_45p3m"]
 interpolation_mode = 2
@@ -18,34 +19,26 @@ metadata/_snap_enabled = true
 noise_type = 0
 frequency = 0.009
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_l852e"]
-noise_type = 0
-frequency = 0.0063
-fractal_gain = 0.49
-fractal_weighted_strength = 0.35
-domain_warp_enabled = true
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4b325"]
+frequency = 0.02
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5kn84"]
 noise_type = 4
-frequency = 0.004
+frequency = 0.0148
 
 [node name="WorldGenerator" type="Node2D"]
 position = Vector2(0, -5)
 script = ExtResource("1_8a8gl")
-map_width = null
-map_height = null
-sea_level = -0.25
-mountain_level = null
-absolute_zero = null
-freezing_point = null
 temperature = SubResource("GradientTexture2D_edyst")
 altitude = SubResource("FastNoiseLite_ms8kh")
-humidity = SubResource("FastNoiseLite_l852e")
+humidity = SubResource("FastNoiseLite_4b325")
 noise_map = SubResource("FastNoiseLite_5kn84")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_tduao")
 format = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.01, 0.01)
+[node name="IB_Player" parent="." instance=ExtResource("3_agb4p")]
+
+[node name="Camera2D" type="Camera2D" parent="IB_Player"]
+zoom = Vector2(0.25, 0.25)

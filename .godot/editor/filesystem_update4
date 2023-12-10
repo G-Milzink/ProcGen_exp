@@ -3,3 +3,4 @@ res://main.tscn
 res://tilesets/topdown_auto.tres
 res://tilesets/inf_biomes.tres
 res://world_generator/wg_ts_128x.tres
+res://world_generator/world_generator.tscn
