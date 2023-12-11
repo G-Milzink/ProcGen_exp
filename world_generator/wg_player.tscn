@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc1h1xewqofo6"]
+
+[ext_resource type="Script" path="res://world_generator/wg_player.gd" id="1_f4vhy"]
+[ext_resource type="Texture2D" uid="uid://0rs2wytx21f6" path="res://0_PNG/wg_player.png" id="2_uq5ye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khp30"]
+radius = 15.0
+
+[node name="WG_Player" type="CharacterBody2D"]
+script = ExtResource("1_f4vhy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_khp30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_uq5ye")

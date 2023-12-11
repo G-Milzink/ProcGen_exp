@@ -1,6 +1,9 @@
-res://world_generator/world_generator.gd
-res://main.tscn
+res://world_generator/wg_player.tscn
 res://tilesets/topdown_auto.tres
 res://tilesets/inf_biomes.tres
 res://world_generator/wg_ts_128x.tres
 res://world_generator/world_generator.tscn
+res://main.tscn
+res://infinite_biomes/infinite_biomes.tscn
+res://infinite_biomes/infinite_biomes.gd
+res://world_generator/world_generator.gd

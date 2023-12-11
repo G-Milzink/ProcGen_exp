@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world_generator/world_generator.gd" id="1_8a8gl"]
 [ext_resource type="TileSet" uid="uid://dd8ur2bjt06f1" path="res://world_generator/wg_ts_128x.tres" id="2_tduao"]
-[ext_resource type="PackedScene" uid="uid://brxrlnsxqrh4s" path="res://infinite_biomes/ib_player.tscn" id="3_agb4p"]
+[ext_resource type="PackedScene" uid="uid://bc1h1xewqofo6" path="res://world_generator/wg_player.tscn" id="3_iol47"]
 
 [sub_resource type="Gradient" id="Gradient_45p3m"]
 interpolation_mode = 2
@@ -38,7 +38,6 @@ noise_map = SubResource("FastNoiseLite_5kn84")
 tile_set = ExtResource("2_tduao")
 format = 2
 
-[node name="IB_Player" parent="." instance=ExtResource("3_agb4p")]
+[node name="WG_Player" parent="." instance=ExtResource("3_iol47")]
 
-[node name="Camera2D" type="Camera2D" parent="IB_Player"]
-zoom = Vector2(0.25, 0.25)
+[node name="Camera2D" type="Camera2D" parent="WG_Player"]

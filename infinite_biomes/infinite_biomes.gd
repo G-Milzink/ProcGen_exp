@@ -3,8 +3,8 @@ extends Node2D
 @onready var tile_map = $TileMap
 @onready var player = $IB_Player
 
-@export var width = 20
-@export var height = 20
+@export var width = 32
+@export var height = 32
 @export var sea_level = 0
 
 @export var moisture: FastNoiseLite

@@ -1,7 +1,7 @@
 extends Node2D
 
-var map_width = 3000
-var map_height = 3000
+var map_width = 1000
+var map_height = 1000
 
 var sea_level = -0.25
 var mountain_level = 0.5
