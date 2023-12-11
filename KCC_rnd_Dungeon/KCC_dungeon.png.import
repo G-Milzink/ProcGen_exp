@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfixex5ws3545"
-path="res://.godot/imported/KCC_dungeon.png-6e4ccb98aa5c9a835d1df41213b2da94.ctex"
+uid="uid://brdmaxy6sphmx"
+path="res://.godot/imported/KCC_dungeon.png-43742fdc3d99ac49660c1cd60c553b55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://0_PNG/KCC_dungeon.png"
-dest_files=["res://.godot/imported/KCC_dungeon.png-6e4ccb98aa5c9a835d1df41213b2da94.ctex"]
+source_file="res://KCC_rnd_Dungeon/KCC_dungeon.png"
+dest_files=["res://.godot/imported/KCC_dungeon.png-43742fdc3d99ac49660c1cd60c553b55.ctex"]
 
 [params]
 
