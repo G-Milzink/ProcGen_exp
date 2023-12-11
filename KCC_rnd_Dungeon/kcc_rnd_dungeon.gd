@@ -1,12 +1,12 @@
 extends Node2D
 
 @export var tile_size = 32
-@export var num_rooms = 30
+@export var num_rooms = 50
 @export var min_size = 6
 @export var max_size = 12
-@export var horiz_spread = 400
-@export var vertic_spread = 200
-@export var cull = .2
+@export var horiz_spread = 800
+@export var vertic_spread = 800
+@export var cull = .5
 
 var room = preload("res://KCC_rnd_Dungeon/room.tscn")
 var path  #Astar pathfinding object
@@ -104,16 +104,48 @@ func make_map():
 	
 	# carve rooms
 	
-	for i in $Rooms.get_children():
-		var s = (i.size / tile_size).floor()
-		var pos = tile_map.local_to_map(i.position)
-		var ul = (i.position / tile_size).floor() - s
-		for x in range(s.x*0.5+1, s.x+s.x*0.5-0.5):
-			for y in range(s.y*0.5+2, s.y+s.y*0.5):
-				tile_map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 0, Vector2i(0, 0))
+	var corridors = [] # One corridor per connection
+	
+	for _room in $Rooms.get_children():
+		var _size = (_room.size / tile_size).floor()
+		var _pos = tile_map.local_to_map(_room.position)
+		var _upperleft = (_room.position / tile_size).floor() - _size
+		for x in range(_size.x*0.5+1, _size.x+_size.x*0.5-0.5):
+			for y in range(_size.y*0.5+2, _size.y+_size.y*0.5):
+				tile_map.set_cell(0, Vector2i(_upperleft.x + x, _upperleft.y + y), 0, Vector2i(0, 0))
+		# carve connection
+		var p = path.get_closest_point(_room.position)
+		for con in path.get_point_connections(p):
+			if not con in corridors:
+				var start = tile_map.local_to_map(path.get_point_position(p))
+				var end = tile_map.local_to_map(path.get_point_position(con))
+				carve_path(start,end)
+		corridors.append(p)
+
+func carve_path(start, end):
+	
+	
+	var difference_x = sign(end.x - start.x)
+	var difference_y = sign(end.y - start.y)
+	
+	if difference_x == 0:
+		difference_x = pow(-1.0, randi() % 2)
+	if difference_y == 0:
+		difference_y = pow(-1.0, randi() % 2)
 		
-		
-		
+	var x_over_y = start
+	var y_over_x = end
+	
+	if randi() % 2 > 0:
+		x_over_y = end
+		y_over_x = start
+
+	for x in range(start.x, end.x, difference_x):
+		tile_map.set_cell(0, Vector2i(x, y_over_x.y),0,Vector2(0,0))
+	for y in range(start.y, end.y, difference_y):
+		tile_map.set_cell(0, Vector2i(x_over_y.x, y), 0, Vector2(0,0))
+
+
 
 
 

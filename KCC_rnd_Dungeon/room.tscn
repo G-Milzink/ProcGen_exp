@@ -3,7 +3,10 @@
 [ext_resource type="Script" path="res://KCC_rnd_Dungeon/room.gd" id="1_owdsc"]
 
 [node name="Room" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
 lock_rotation = true
+freeze_mode = 1
 script = ExtResource("1_owdsc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
