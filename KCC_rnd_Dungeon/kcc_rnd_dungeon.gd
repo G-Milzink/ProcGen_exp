@@ -8,25 +8,29 @@ extends Node2D
 @export var vertic_spread = 800
 @export var cull = .5
 
+var draw_generation = false
+
 var room = preload("res://KCC_rnd_Dungeon/room.tscn")
 var path  #Astar pathfinding object
 
 @onready var tile_map = $TileMap
 
 func _ready():
+	RenderingServer.set_default_clear_color(Color("0a0613"))
 	randomize()
 	_makeRooms()
 
 func _draw():
-	for i in $Rooms.get_children():
-		draw_rect(Rect2(i.position - i.size + i.size / 2, i.size ), Color.YELLOW, false)
-	
-	if path:
-		for p in path.get_point_ids():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				draw_line(pp,cp,Color.ORANGE, 15, true)
+	if draw_generation:
+		for i in $Rooms.get_children():
+			draw_rect(Rect2(i.position - i.size + i.size / 2, i.size ), Color.YELLOW, false)
+		
+		if path:
+			for p in path.get_point_ids():
+				for c in path.get_point_connections(p):
+					var pp = path.get_point_position(p)
+					var cp = path.get_point_position(c)
+					draw_line(pp,cp,Color.ORANGE, 15, true)
 
 func _input(event):
 	if event.is_action_pressed("ui_select"):
@@ -96,14 +100,13 @@ func make_map():
 	for i in $Rooms.get_children():
 		var r = Rect2(i.position-i.size, i.get_node("CollisionShape2D").shape.size*2)
 		full_rect = full_rect.merge(r)
-	var top_left = tile_map.local_to_map(full_rect.position)
-	var bottom_right = tile_map.local_to_map(full_rect.end)
-	for x in range(top_left.x, bottom_right.x):
-		for y in range(top_left.y, bottom_right.y):
-			tile_map.set_cell(0,Vector2(x,y),0,Vector2(1,0))
+	#var top_left = tile_map.local_to_map(full_rect.position)
+	#var bottom_right = tile_map.local_to_map(full_rect.end)
+	#for x in range(top_left.x, bottom_right.x):
+		#for y in range(top_left.y, bottom_right.y):
+			#tile_map.set_cell(0,Vector2(x,y), 0, Vector2(0,0))
 	
 	# carve rooms
-	
 	var corridors = [] # One corridor per connection
 	
 	for _room in $Rooms.get_children():
@@ -112,7 +115,8 @@ func make_map():
 		var _upperleft = (_room.position / tile_size).floor() - _size
 		for x in range(_size.x*0.5+1, _size.x+_size.x*0.5-0.5):
 			for y in range(_size.y*0.5+2, _size.y+_size.y*0.5):
-				tile_map.set_cell(0, Vector2i(_upperleft.x + x, _upperleft.y + y), 0, Vector2i(0, 0))
+				#tile_map.set_cell(0, Vector2i(_upperleft.x + x, _upperleft.y + y), 0, Vector2i(2, 2))
+				tile_map.set_cells_terrain_connect(0,[Vector2i(_upperleft.x + x, _upperleft.y + y)],0,0, false)
 		# carve connection
 		var p = path.get_closest_point(_room.position)
 		for con in path.get_point_connections(p):
@@ -141,9 +145,10 @@ func carve_path(start, end):
 		y_over_x = start
 
 	for x in range(start.x, end.x, difference_x):
-		tile_map.set_cell(0, Vector2i(x, y_over_x.y),0,Vector2(0,0))
+		tile_map.set_cells_terrain_connect(0, [Vector2i(x, y_over_x.y)], 0, 0, false)
 	for y in range(start.y, end.y, difference_y):
-		tile_map.set_cell(0, Vector2i(x_over_y.x, y), 0, Vector2(0,0))
+		tile_map.set_cells_terrain_connect(0, [Vector2i(x_over_y.x, y)], 0, 0, false)
+		
 
 
 

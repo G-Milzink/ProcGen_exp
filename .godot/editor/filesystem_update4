@@ -3,3 +3,7 @@ res://tilesets/KCC_dungeon.tres
 res://KCC_rnd_Dungeon/room.tscn
 res://KCC_rnd_Dungeon/kcc_rnd_dungeon.gd
 res://KCC_rnd_Dungeon/KCC_dungeon.tres
+res://tilesets/topdown_auto.tres
+res://tilesets/inf_biomes.tres
+res://world_generator/wg_ts_128x.tres
+res://main.tscn

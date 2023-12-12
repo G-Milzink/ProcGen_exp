@@ -11,6 +11,7 @@ script = ExtResource("1_mtfhw")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_vl7w4")
 format = 2
+layer_0/name = "DunGen"
 
 [node name="Rooms" type="Node" parent="."]
 
@@ -18,3 +19,4 @@ format = 2
 script = ExtResource("4_ayrc4")
 
 [node name="Camera2D" type="Camera2D" parent="KCC_Player"]
+zoom = Vector2(2, 2)
