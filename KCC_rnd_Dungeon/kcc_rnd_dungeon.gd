@@ -39,6 +39,7 @@ func _input(event):
 		_makeRooms()
 	if event.is_action_pressed("ui_focus_next"):
 		make_map()
+		tile_map.notify_runtime_tile_data_update()
 
 func _process(delta):
 	queue_redraw()
@@ -88,6 +89,7 @@ func find_mst(nodes):
 		_path.add_point(node,min_pos)
 		_path.connect_points(_path.get_closest_point(cur_pos),node)
 		nodes.erase(min_pos)
+	print("done!")
 	return _path
 
 func make_map():

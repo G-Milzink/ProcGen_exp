@@ -19,4 +19,4 @@ layer_0/name = "DunGen"
 script = ExtResource("4_ayrc4")
 
 [node name="Camera2D" type="Camera2D" parent="KCC_Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.445, 1.445)
