@@ -41,3 +41,4 @@ format = 2
 [node name="WG_Player" parent="." instance=ExtResource("3_iol47")]
 
 [node name="Camera2D" type="Camera2D" parent="WG_Player"]
+zoom = Vector2(0.25, 0.25)

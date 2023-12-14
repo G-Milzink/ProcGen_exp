@@ -1,8 +1,7 @@
-res://KCC_rnd_Dungeon/kcc_rnd_dungeon.tscn
+res://pattern_testing/pattern_test.tscn
 res://tilesets/topdown_auto.tres
 res://tilesets/inf_biomes.tres
 res://world_generator/wg_ts_128x.tres
 res://KCC_rnd_Dungeon/KCC_dungeon.tres
-res://main.tscn
-res://KCC_rnd_Dungeon/room.tscn
-res://KCC_rnd_Dungeon/kcc_rnd_dungeon.gd
+res://top_down_3x/top_down_3x_tileset.tres
+res://pattern_testing/pattern_testing_tileset01.tres

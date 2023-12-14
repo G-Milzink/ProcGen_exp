@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3vr8v7lvo5wh"]
+[gd_scene load_steps=6 format=3 uid="uid://b3vr8v7lvo5wh"]
 
 [ext_resource type="Script" path="res://KCC_rnd_Dungeon/kcc_rnd_dungeon.gd" id="1_mtfhw"]
 [ext_resource type="TileSet" uid="uid://bdpje1gn52vxj" path="res://KCC_rnd_Dungeon/KCC_dungeon.tres" id="2_vl7w4"]
 [ext_resource type="PackedScene" uid="uid://cbndbv88huqy0" path="res://KCC_rnd_Dungeon/kcc_player.tscn" id="3_v5lak"]
 [ext_resource type="Script" path="res://KCC_rnd_Dungeon/kcc_player.gd" id="4_ayrc4"]
+[ext_resource type="PackedScene" uid="uid://u8kdo1albtvr" path="res://KCC_rnd_Dungeon/exit.tscn" id="5_t25dt"]
 
 [node name="KCC_rnd_Dungeon" type="Node2D"]
 script = ExtResource("1_mtfhw")
@@ -19,4 +20,11 @@ layer_0/name = "DunGen"
 script = ExtResource("4_ayrc4")
 
 [node name="Camera2D" type="Camera2D" parent="KCC_Player"]
-zoom = Vector2(1.445, 1.445)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Exit" parent="." instance=ExtResource("5_t25dt")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.137255, 0.137255, 0.137255, 1)

@@ -14,11 +14,17 @@ var room = preload("res://KCC_rnd_Dungeon/room.tscn")
 var path  #Astar pathfinding object
 
 @onready var tile_map = $TileMap
+@onready var player = $KCC_Player
+@onready var exit = $Exit
 
 func _ready():
 	RenderingServer.set_default_clear_color(Color("0a0613"))
 	randomize()
 	_makeRooms()
+	await(get_tree().create_timer(3.5).timeout)
+	make_map()
+	_pickStartEndRooms()
+
 
 func _draw():
 	if draw_generation:
@@ -31,15 +37,6 @@ func _draw():
 					var pp = path.get_point_position(p)
 					var cp = path.get_point_position(c)
 					draw_line(pp,cp,Color.ORANGE, 15, true)
-
-func _input(event):
-	if event.is_action_pressed("ui_select"):
-		for n in $Rooms.get_children():
-			n.queue_free()
-		_makeRooms()
-	if event.is_action_pressed("ui_focus_next"):
-		make_map()
-		tile_map.notify_runtime_tile_data_update()
 
 func _process(delta):
 	queue_redraw()
@@ -129,8 +126,6 @@ func make_map():
 		corridors.append(p)
 
 func carve_path(start, end):
-	
-	
 	var difference_x = sign(end.x - start.x)
 	var difference_y = sign(end.y - start.y)
 	
@@ -150,9 +145,15 @@ func carve_path(start, end):
 		tile_map.set_cells_terrain_connect(0, [Vector2i(x, y_over_x.y)], 0, 0, false)
 	for y in range(start.y, end.y, difference_y):
 		tile_map.set_cells_terrain_connect(0, [Vector2i(x_over_y.x, y)], 0, 0, false)
-		
 
-
+func _pickStartEndRooms():
+	var room_positions = []
+	for i in $Rooms.get_children():
+		room_positions.append(i.position)
+	var start_room_position = room_positions.min()
+	var exit_room_position = room_positions.max()
+	player.position = start_room_position
+	exit.position = exit_room_position
 
 
 

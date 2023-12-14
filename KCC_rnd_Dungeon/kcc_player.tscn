@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbndbv88huqy0"]
+[gd_scene load_steps=6 format=3 uid="uid://cbndbv88huqy0"]
 
 [ext_resource type="Script" path="res://infinite_biomes/ib_player.gd" id="1_ofklc"]
 [ext_resource type="Texture2D" uid="uid://bbuk5noy5sfci" path="res://0_PNG/player.png" id="2_2svs0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_khp30"]
 radius = 7.07107
+
+[sub_resource type="Gradient" id="Gradient_t02hj"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.752941)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xipvy"]
+gradient = SubResource("Gradient_t02hj")
+width = 320
+height = 320
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
 
 [node name="IB_Player" type="CharacterBody2D"]
 script = ExtResource("1_ofklc")
@@ -14,3 +27,9 @@ shape = SubResource("CircleShape2D_khp30")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_2svs0")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.8, 0.4, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_xipvy")
+texture_scale = 1.1

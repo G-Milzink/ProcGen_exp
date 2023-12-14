@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0v8rxymwygjo"]
+
+[ext_resource type="Script" path="res://top_down_3x/top_down_3x.gd" id="1_8gcdg"]
+[ext_resource type="TileSet" uid="uid://bl4c5pff1iywt" path="res://top_down_3x/top_down_3x_tileset.tres" id="1_8wcg8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_304gr"]
+frequency = 0.0128
+
+[sub_resource type="Gradient" id="Gradient_pc24j"]
+offsets = PackedFloat32Array(0.339564, 0.570093, 0.725857)
+colors = PackedColorArray(1, 1, 1, 1, 0.56741, 0.56741, 0.56741, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jby10"]
+gradient = SubResource("Gradient_pc24j")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l2vew"]
+frequency = 0.0165
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eg2gi"]
+noise_type = 0
+frequency = 0.0236
+fractal_type = 2
+fractal_gain = 0.82
+fractal_weighted_strength = 1.0
+
+[node name="TopDown_3x" type="Node2D"]
+script = ExtResource("1_8gcdg")
+noise_sand = SubResource("FastNoiseLite_304gr")
+fall_off_texture = SubResource("GradientTexture2D_jby10")
+noise_grass = SubResource("FastNoiseLite_l2vew")
+noise_rock = SubResource("FastNoiseLite_eg2gi")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_8wcg8")
+format = 2
+layer_0/name = "Base"
+layer_1/name = "Grass"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Rock"
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.17, 0.17)
