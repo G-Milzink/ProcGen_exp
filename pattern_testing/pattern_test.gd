@@ -12,7 +12,8 @@ var loot_tiles: Array
 var spawn_tiles: Array
 var door_tiles: Array
 
-var astar = AStar2D.new()
+var astar_grid = AStarGrid2D.new()
+var path: PackedVector2Array
 
 const LOOT_TILE = Vector2(3,2)
 const SPAWN_TILE = Vector2(3,1)
@@ -24,47 +25,13 @@ func _input(event):
 
 func _ready():
 	getPatterns()
-	
-#region Temporary room placment
-	var rng: int
-	var select: TileMapPattern
-	var dir: Vector2i
-	#Spawn a room
-	rng = randi_range(1,4)
-	match rng:
-		1:
-			select = room1n
-		2:
-			select = room1e
-		3:
-			select = room1s
-		4:
-			select = room1w
-	tile_map.set_pattern(0,Vector2i(0,0),select)
-	#Spawn a second room...
-	rng = randi_range(1,4)
-	match rng:
-		1:
-			select = room1n
-		2:
-			select = room1e
-		3:
-			select = room1s
-		4:
-			select = room1w
-	dir.x = randi_range(0,1)
-	if dir.x == 0: dir.x = -1
-	dir.y = randi_range(0,1)
-	if dir.y == 0: dir.y = -1
-	var pos = Vector2i(randi_range(8,16)*dir.x,randi_range(8,16)*dir.y)
-	tile_map.set_pattern(0,pos,select)
-#endregion
-	
+	placeRooms()
 	iterateMap()
+	createPaths()
+
 
 func getPatterns():
 	var pattern_tiles = []
-#region Get room1 patterns
 	#room1_north_entry:
 	pattern_tiles.clear()
 	for x in range(0,7):
@@ -89,7 +56,49 @@ func getPatterns():
 		for y in range(0,7):
 			pattern_tiles.append(Vector2i(x,y))
 	room1w = tile_patterns.get_pattern(0,pattern_tiles)
-#endregion
+
+func placeRooms():
+	var rng: int
+	var select: TileMapPattern
+	var pos
+	#Spawn a room
+	rng = randi_range(1,4)
+	match rng:
+		1:
+			select = room1n
+		2:
+			select = room1e
+		3:
+			select = room1s
+		4:
+			select = room1w
+	tile_map.set_pattern(0,Vector2i(2,2),select)
+	#Spawn a second room...
+	rng = randi_range(1,4)
+	match rng:
+		1:
+			select = room1n
+		2:
+			select = room1e
+		3:
+			select = room1s
+		4:
+			select = room1w
+	pos = Vector2i(randi_range(10,20),randi_range(10,20))
+	tile_map.set_pattern(0,pos,select)
+	#Spawn a third room...
+	rng = randi_range(1,4)
+	match rng:
+		1:
+			select = room1n
+		2:
+			select = room1e
+		3:
+			select = room1s
+		4:
+			select = room1w
+	pos = Vector2i(randi_range(25,35),randi_range(25,35))
+	tile_map.set_pattern(0,pos,select)
 
 func iterateMap():
 	var td: TileData
@@ -107,7 +116,21 @@ func iterateMap():
 		elif td.get_custom_data("is_door"):
 			tile_map.set_cell(0,tile,0,DOOR_TILE)
 			door_tiles.append(tile)
-	print("Doors: ", door_tiles)
-	print("Loots: ", loot_tiles)
-	print("Spawns: ", spawn_tiles)
-	
+
+func createPaths():
+	var td: TileData
+	astar_grid.region = Rect2(0,0,50, 50)
+	astar_grid.cell_size = Vector2(32,32)
+	astar_grid.set_default_compute_heuristic(1)
+	astar_grid.set_default_estimate_heuristic(1)
+
+	astar_grid.set_diagonal_mode(AStarGrid2D.DIAGONAL_MODE_NEVER)
+	astar_grid.update()
+	for tile in tile_map.get_used_cells(0):
+		td = tile_map.get_cell_tile_data(0,tile)
+		if td.get_custom_data("is_wall"):
+			astar_grid.set_point_solid(tile,true)
+	path = astar_grid.get_id_path(door_tiles[0], door_tiles[1])
+	tile_map.set_cells_terrain_connect(0,path,0,0,false)
+	path = astar_grid.get_id_path(door_tiles[1], door_tiles[2])
+	tile_map.set_cells_terrain_connect(0,path,0,0,false)
