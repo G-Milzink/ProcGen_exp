@@ -97,7 +97,7 @@ func placeRooms():
 			select = room1s
 		4:
 			select = room1w
-	pos = Vector2i(randi_range(25,35),randi_range(25,35))
+	pos = Vector2i(randi_range(21,40),randi_range(21,40))
 	tile_map.set_pattern(0,pos,select)
 
 func iterateMap():
@@ -119,18 +119,18 @@ func iterateMap():
 
 func createPaths():
 	var td: TileData
-	astar_grid.region = Rect2(0,0,50, 50)
+	astar_grid.region = Rect2(0,0,100, 100)
 	astar_grid.cell_size = Vector2(32,32)
 	astar_grid.set_default_compute_heuristic(1)
 	astar_grid.set_default_estimate_heuristic(1)
-
 	astar_grid.set_diagonal_mode(AStarGrid2D.DIAGONAL_MODE_NEVER)
 	astar_grid.update()
+	
 	for tile in tile_map.get_used_cells(0):
 		td = tile_map.get_cell_tile_data(0,tile)
 		if td.get_custom_data("is_wall"):
 			astar_grid.set_point_solid(tile,true)
 	path = astar_grid.get_id_path(door_tiles[0], door_tiles[1])
 	tile_map.set_cells_terrain_connect(0,path,0,0,false)
-	path = astar_grid.get_id_path(door_tiles[1], door_tiles[2])
+	path = astar_grid.get_id_path(door_tiles[0], door_tiles[2])
 	tile_map.set_cells_terrain_connect(0,path,0,0,false)

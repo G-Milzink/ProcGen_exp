@@ -5,7 +5,4 @@ res://world_generator/wg_ts_128x.tres
 res://KCC_rnd_Dungeon/KCC_dungeon.tres
 res://top_down_3x/top_down_3x_tileset.tres
 res://pattern_testing/pattern_testing_tileset01.tres
-res://astar_testing/astar_testing.tscn
 res://pattern_testing/pattern_test.tscn
-res://astar_testing/astar_testing.gd
-res://pattern_testing/pattern_test.gd
